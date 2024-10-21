@@ -3,15 +3,22 @@ import os
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+import pathlib
 
 url = "https://www.billboard.com/charts/hot-100/"
 response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "html.parser")
 
+#please change this path as required as your path will be different from mine
+# filename = "billboard_hot_100.csv"
+# pathToFolder = "/Users/twisted_fate/Desktop/594 Data Science/ser594_23fc_project/pythonProject1/data_original/billboard_hot_100.csv"
 
-filename = "billboard_hot_100.csv"
-pathToFolder = "/Users/twisted_fate/Desktop/594 Data Science/ser594_23fc_project/pythonProject1/data_original/billboard_hot_100.csv"
+# this should work fine if it does not replace
+# every thing before the name of the csv file with absolute path to foldername => data_original
+folder_name = "data_original"
+billboardFile = "billboard_hot_100.csv"
+pathToFolder= str(pathlib.Path().resolve()) +"/"+ folder_name + "/" + billboardFile
 
 headers = "Song, Artist, Last Week, Peak Position, Weeks on Chart\n"
 
@@ -51,4 +58,4 @@ for i, container in enumerate(soup.select("ul.o-chart-results-list-row")):
 
 # saving dictionary in filename
 df = pd.DataFrame(list_song_100)
-df.to_csv(pathToFolder)
+df.to_csv(pathToFolder,index=False)
