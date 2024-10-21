@@ -4,6 +4,12 @@ import lyricsgenius
 import pandas as pd
 from lyricsgenius import Genius
 
+import os
+
+folder_name = "data_original"
+pathToFolder = "/Users/twisted_fate/Desktop/594 Data Science/ser594_23fc_project/pythonProject1/data_original/"
+
+
 token = "mKu246Cbo3UL41cYIsjLLD3WN7dl5tjyYYQvIIZ5kI028e_3JuzY_jN9HRpvePi7"
 genius = lyricsgenius.Genius(token, timeout = 500, remove_section_headers = True, verbose = False)
 
@@ -37,9 +43,9 @@ for tag in tags:
     res = genius.tag(tag)
     for hit in res['hits']:
         # song_lyrics = genius.lyrics(song_url=hit['url'])
+        song = genius.search_song(hit['title'])
         if song != None:
             # print(song.lyrics)
-            song = genius.search_song(hit['title'])
             song_dict['artist'].append(song.artist)
             song_dict['title'].append(song.title)
             song_dict['url'].append(song.url)
@@ -48,4 +54,4 @@ for tag in tags:
 
 
 df = pd.DataFrame(song_dict)
-df.to_csv('ArtistwithLyrics.csv')
+df.to_csv(pathToFolder+'ArtistwithLyrics.csv')

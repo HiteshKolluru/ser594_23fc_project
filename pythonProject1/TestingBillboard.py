@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -7,7 +9,9 @@ response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "html.parser")
 
+
 filename = "billboard_hot_100.csv"
+pathToFolder = "/Users/twisted_fate/Desktop/594 Data Science/ser594_23fc_project/pythonProject1/data_original/billboard_hot_100.csv"
 
 headers = "Song, Artist, Last Week, Peak Position, Weeks on Chart\n"
 
@@ -47,4 +51,4 @@ for i, container in enumerate(soup.select("ul.o-chart-results-list-row")):
 
 # saving dictionary in filename
 df = pd.DataFrame(list_song_100)
-df.to_csv(filename)
+df.to_csv(pathToFolder)
