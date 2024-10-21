@@ -22,6 +22,16 @@ The lyrics sometimes have other languages, so they need to be tagged for being e
 Some of the lyrics are not songs so need to figure out how to either filter it out of the data generated or ensure it is not added to the data in the first place.
 
 
+Regarding data-processing I need to remove foul language. 
+
+Incase the reading or opening of a file is causing issues
+this should work fine if incase this does not work replace
+every thing before the name of the csv file with absolute path to foldername => data_original
+like the below
+pathToFolder => absolute path to data_original
+
+Followed by the name of the file being used.
+ 
 
 
 

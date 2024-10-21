@@ -24,7 +24,7 @@ song_dict = {
 
 # this should work fine if it does not replace
 # every thing before the name of the csv file with absolute path to foldername => data_original
-billboardFile = "billboard_hot_100.csv"
+billboardFile = "billboard_current_week_100.csv"
 pathtobillboard= str(pathlib.Path().resolve()) +"/"+ folder_name + "/" + billboardFile
 i = 0
 with open(pathtobillboard, mode ='r')as file:
