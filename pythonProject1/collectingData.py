@@ -1,4 +1,3 @@
-
 import lyricsgenius
 import pandas as pd
 import pathlib
@@ -63,7 +62,6 @@ for tag in tags:
             song_dict['song_id'].append(song.id)
             song_dict['lyrics'].append(song.lyrics)
             # i+=1
-
 
 df = pd.DataFrame(song_dict)
 
