@@ -46,22 +46,25 @@ with open(pathtobillboard, mode ='r')as file:
 # the following is not giving correct data might need to look into it further
 # possibly try this:  Genius,9345566,May 2024 Singles Release Calendar,https://genius.com/Genius-may-2024-singles-release-calendar-annotated,"15 ContributorsMay 2024 Singles Release Calendar Lyrics5/1
 # adore - ""did i tell u that i miss u""
-page = 1
-tags = ['pop', 'rock', 'country']
-for tag in tags:
-    res = genius.tag(tag)
-    for hit in res['hits']:
-        # song_lyrics = genius.lyrics(song_url=hit['url'])
-        song = genius.search_song(hit['title'])
-        if song != None:
-            # print(song.lyrics)
-            # song_dict['Index'].append(str(i))
-            song_dict['artist'].append(song.artist)
-            song_dict['title'].append(song.title)
-            song_dict['url'].append(song.url)
-            song_dict['song_id'].append(song.id)
-            song_dict['lyrics'].append(song.lyrics)
-            # i+=1
+
+
+# Data here is too bad to use needs to be addressed before usable
+# page = 1
+# tags = ['pop', 'rock', 'country']
+# for tag in tags:
+#     res = genius.tag(tag)
+#     for hit in res['hits']:
+#         # song_lyrics = genius.lyrics(song_url=hit['url'])
+#         song = genius.search_song(hit['title'])
+#         if song != None:
+#             # print(song.lyrics)
+#             # song_dict['Index'].append(str(i))
+#             song_dict['artist'].append(song.artist)
+#             song_dict['title'].append(song.title)
+#             song_dict['url'].append(song.url)
+#             song_dict['song_id'].append(song.id)
+#             song_dict['lyrics'].append(song.lyrics)
+#             # i+=1
 
 df = pd.DataFrame(song_dict)
 

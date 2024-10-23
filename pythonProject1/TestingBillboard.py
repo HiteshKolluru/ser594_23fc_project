@@ -43,4 +43,4 @@ for i, container in enumerate(soup.select("ul.o-chart-results-list-row")):
 
 # saving dictionary in filename
 df = pd.DataFrame(list_song_100)
-df.to_csv(pathToFolder,index=False)
+df.to_csv(pathToFolder,index=False, header=False)
