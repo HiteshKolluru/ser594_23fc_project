@@ -1,7 +1,11 @@
+import re
+import time
+
 import lyricsgenius
 import pandas as pd
 import pathlib
 import csv
+import langid
 
 #please change this path as required as your path will be different from mine
 folder_name = "data_original"
@@ -19,28 +23,50 @@ song_dict = {
     'title': [],
     'url' : [],
     'lyrics': [],
-    # 'Lang' : [], can be added to detect language before it is stored
+    'year': [],
 }
+
+
+def compare_strings(str1, str2):
+    # Remove all non-alphanumeric characters (including spaces)
+    cleaned_str1 = re.sub(r'[^a-zA-Z0-9]', '', str1)
+    cleaned_str2 = re.sub(r'[^a-zA-Z0-9]', '', str2)
+
+    # Compare the cleaned strings
+    return cleaned_str1.lower() == cleaned_str2.lower()
 
 # this should work fine if it does not replace
 # every thing before the name of the csv file with absolute path to foldername => data_original
 billboardFile = "billboard_current_week_100.csv"
+pitchforkfile = "pitchfork.csv"
 pathtobillboard= str(pathlib.Path().resolve()) +"/"+ folder_name + "/" + billboardFile
+pathtopitchfork= str(pathlib.Path().resolve()) + "/"+ folder_name + "/" + pitchforkfile
 i = 0
-with open(pathtobillboard, mode ='r')as file:
+with open(pathtopitchfork, mode ='r')as file:
   csvFile = csv.reader(file)
   for lines in csvFile:
     print(lines)
-    song = genius.search_song(lines[0], artist=lines[1])
-    if song != None:
-        # print(song.lyrics)
-        # song_dict['Index'].append(str(i))
-        song_dict['artist'].append(song.artist)
-        song_dict['title'].append(song.title)
-        song_dict['url'].append(song.url)
-        song_dict['song_id'].append(song.id)
-        song_dict['lyrics'].append(song.lyrics)
-        # i+=1
+    time.sleep(2)
+    song = genius.search_song(title=lines[0], artist=lines[1])
+    if song is not None and langid.classify(song.lyrics) == 'en':
+        if not (lines[1].lower() in song.artist.lower() or song.artist.lower() in lines[1].lower())  and not compare_strings(song.artist, lines[1]):
+        # if not compare_strings(song.artist, lines[1]) and not compare_strings(song.title, lines[0]):
+            print("SUSSUSSUSSUSSUSSUSSUSSUSSUSSUS")
+            print(song.title, song.artist)
+            print(lines[0], lines[1], lines[2])
+            print("SUSSUSSUSSUSSUSSUSSUSSUSSUSSUS")
+        else:
+            # print(song.lyrics)
+            # song_dict['Index'].append(str(i))
+            song_dict['artist'].append(song.artist)
+            song_dict['title'].append(song.title)
+            song_dict['url'].append(song.url)
+            song_dict['song_id'].append(song.id)
+            song_dict['lyrics'].append(song.lyrics)
+            song_dict['year'].append(lines[2])
+            # i+=1
+    else:
+        print("song not found")
 
 
 # the following is not giving correct data might need to look into it further

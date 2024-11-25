@@ -96,84 +96,84 @@ def mainViz():
     song = songs_dict['Lyrics_Processed']
     artist = songs_dict['artist']
 
-    billie = []
-    bCount = Counter()
-    sabrina = []
-    sCount = Counter()
-    chapple = []
-    cCount = Counter()
-    for i in range(len(song)):
-        if (artist[i] == 'Billie Eilish'):
-            tempstr = song[i].split(" ")
-            bCount.update(tempstr)
-            billie.append(song[i])
-
-        if (artist[i] == "Sabrina Carpenter"):
-            tempstr = song[i].split(" ")
-            sCount.update(tempstr)
-            sabrina.append(song[i])
-
-        if (artist[i] == "Chappell Roan"):
-            tempstr = song[i].split(" ")
-            cCount.update(tempstr)
-            chapple.append(song[i])
+    # billie = []
+    # bCount = Counter()
+    # sabrina = []
+    # sCount = Counter()
+    # chapple = []
+    # cCount = Counter()
+    # for i in range(len(song)):
+    #     if (artist[i] == 'Billie Eilish'):
+    #         tempstr = song[i].split(" ")
+    #         bCount.update(tempstr)
+    #         billie.append(song[i])
+    #
+    #     if (artist[i] == "Sabrina Carpenter"):
+    #         tempstr = song[i].split(" ")
+    #         sCount.update(tempstr)
+    #         sabrina.append(song[i])
+    #
+    #     if (artist[i] == "Chappell Roan"):
+    #         tempstr = song[i].split(" ")
+    #         cCount.update(tempstr)
+    #         chapple.append(song[i])
 
     # print(billie)
     # print(sabrina)
     # print(chapple)
 
-    word_list = []
-    counts_list = []
-    for con in bCount.most_common(30):
-        word_list.append(con[0])
-        counts_list.append(con[1])
-
-    plt.bar(word_list, counts_list, color='green', width=0.5)
-    plt.xlabel("Words")
-    plt.ylabel("Count")
-    plt.title("Top 30 most common words Billie Eilish")
-    plt.xticks(rotation=45, ha='right')
-
-    # plt.savefig("your_file_name"+".png", bbox_inches='tight')
-    plt.savefig(path + savefolder + "Top30BillieEilish.png", bbox_inches='tight')
-    plt.show()
-    plt.close()
-
-    # Sabrina Carpenter
-    word_list = []
-    counts_list = []
-    for con in sCount.most_common(30):
-        word_list.append(con[0])
-        counts_list.append(con[1])
-
-    plt.bar(word_list, counts_list, color='blue', width=0.5)
-    plt.xlabel("Words")
-    plt.ylabel("Count")
-    plt.title("Top 30 most common words Sabrina Carpenter")
-    plt.xticks(rotation=45, ha='right')
-
-    # plt.savefig("your_file_name"+".png", bbox_inches='tight')
-    plt.savefig(path + savefolder + "Top30SabrinaCarpenter.png", bbox_inches='tight')
-    plt.show()
-    plt.close()
-
-    # Chapple Roan
-    word_list = []
-    counts_list = []
-    for con in cCount.most_common(30):
-        word_list.append(con[0])
-        counts_list.append(con[1])
-
-    plt.bar(word_list, counts_list, color='red', width=0.5)
-    plt.xlabel("Words")
-    plt.ylabel("Count")
-    plt.title("Top 30 most common words Chappell Roan")
-    plt.xticks(rotation=45, ha='right')
-
-    # plt.savefig("your_file_name"+".png", bbox_inches='tight')
-    plt.savefig(path + savefolder + "Top30ChappelRoan.png", bbox_inches='tight')
-    plt.show()
-    plt.close()
+    # word_list = []
+    # counts_list = []
+    # for con in bCount.most_common(30):
+    #     word_list.append(con[0])
+    #     counts_list.append(con[1])
+    #
+    # plt.bar(word_list, counts_list, color='green', width=0.5)
+    # plt.xlabel("Words")
+    # plt.ylabel("Count")
+    # plt.title("Top 30 most common words Billie Eilish")
+    # plt.xticks(rotation=45, ha='right')
+    #
+    # # plt.savefig("your_file_name"+".png", bbox_inches='tight')
+    # plt.savefig(path + savefolder + "Top30BillieEilish.png", bbox_inches='tight')
+    # plt.show()
+    # plt.close()
+    #
+    # # Sabrina Carpenter
+    # word_list = []
+    # counts_list = []
+    # for con in sCount.most_common(30):
+    #     word_list.append(con[0])
+    #     counts_list.append(con[1])
+    #
+    # plt.bar(word_list, counts_list, color='blue', width=0.5)
+    # plt.xlabel("Words")
+    # plt.ylabel("Count")
+    # plt.title("Top 30 most common words Sabrina Carpenter")
+    # plt.xticks(rotation=45, ha='right')
+    #
+    # # plt.savefig("your_file_name"+".png", bbox_inches='tight')
+    # plt.savefig(path + savefolder + "Top30SabrinaCarpenter.png", bbox_inches='tight')
+    # plt.show()
+    # plt.close()
+    #
+    # # Chapple Roan
+    # word_list = []
+    # counts_list = []
+    # for con in cCount.most_common(30):
+    #     word_list.append(con[0])
+    #     counts_list.append(con[1])
+    #
+    # plt.bar(word_list, counts_list, color='red', width=0.5)
+    # plt.xlabel("Words")
+    # plt.ylabel("Count")
+    # plt.title("Top 30 most common words Chappell Roan")
+    # plt.xticks(rotation=45, ha='right')
+    #
+    # # plt.savefig("your_file_name"+".png", bbox_inches='tight')
+    # plt.savefig(path + savefolder + "Top30ChappelRoan.png", bbox_inches='tight')
+    # plt.show()
+    # plt.close()
 
     # # Create the bar chart
     # plt.figure(figsize=(100, 30))
