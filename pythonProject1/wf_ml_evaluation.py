@@ -1,37 +1,22 @@
 import pathlib
 import random
-import re
-
 import numpy as np
 import pandas as pd
 from imblearn.over_sampling import SMOTE
-from nltk import WordNetLemmatizer, word_tokenize
-from nltk.corpus import stopwords
+from nltk import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-
 from gensim.models import Word2Vec
-
 import wf_ml_prediction
 import wf_ml_training
 import lyricsgenius
 
-
 token = "mKu246Cbo3UL41cYIsjLLD3WN7dl5tjyYYQvIIZ5kI028e_3JuzY_jN9HRpvePi7"
 genius = lyricsgenius.Genius(token, timeout = 500, remove_section_headers = True, verbose = False, skip_non_songs= True)
 
-
 def preprocess_lyrics(lyrics):
-    # Remove special characters and numbers
-    lyrics = re.sub(r'[^a-zA-Z\s]', '', lyrics)
-    # Tokenize and lowercase
-    tokens = word_tokenize(lyrics.lower())
-    # Remove stopwords and lemmatize
-    stop_words = set(stopwords.words('english'))
-    lemmatizer = WordNetLemmatizer()
-    processed_tokens = [lemmatizer.lemmatize(token) for token in tokens if token not in stop_words]
-    return ' '.join(processed_tokens)  # Convert to lowercase and split into words
-
+    lyrics = word_tokenize(lyrics.lower())
+    return ' '.join(lyrics)  # Convert to lowercase and split into words
 
 def compute_sentence_embedding(tokens, word2vec_model):
     vectors = [word2vec_model.wv[word] for word in tokens if word in word2vec_model.wv]
@@ -155,6 +140,12 @@ if __name__ == "__main__":
     idx = songs.isin(['test_song']).any(axis=1).idxmax()
     wf_ml_prediction.regression_model_happy_pred(vectorizer.transform(test_song).toarray(), songs['happy'][idx], test_song)
 
+    ################### working with lyrical density ###################
+
+    wf_ml_training.trainKmean(songs)
+    wf_ml_training.trainDBScan(songs)
+
+    ################### working with lyrical density ###################
 
     # Example usage of prediction function
     while True:
@@ -185,4 +176,4 @@ if __name__ == "__main__":
             print("Song is sad")
         else:
             print("Song is happy")
-
+        wf_ml_prediction.kmeans_clustering_experiment(song.lyrics)

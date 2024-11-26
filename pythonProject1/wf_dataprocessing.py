@@ -1,14 +1,15 @@
 import random
+import re
 import string
-from operator import truediv
 
 import langid
 import pandas as pd
 import nltk
+from nltk import WordNetLemmatizer
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 nltk.download(["stopwords","vader_lexicon","punkt","wordnet"])
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, cmudict
 from nltk.tokenize import RegexpTokenizer
 import pathlib
 
@@ -38,10 +39,38 @@ def preprocess_text(text):
     # when accessing this in visualization it is coming up as a list will look into this.
     word_count = len(processed_words)
     unique_words_count = len(set(processed_words))
-    processed_words = ' '.join(word for word in processed_words)
+    lemmatizer = WordNetLemmatizer()
+    processed_tokens = [lemmatizer.lemmatize(token) for token in tokens if token not in stop_words]
+    processed_words = ' '.join(word for word in processed_tokens)
 
     return processed_words, word_count, unique_words_count
 
+d = cmudict.dict()
+def syllable_count(word):
+    try:
+        return [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]][0]
+    except KeyError:
+        # If word not in CMU dictionary, estimate based on vowels
+        return len(re.findall(r'[aeiouy]+', word.lower()))
+
+# Function to calculate lyrical density metrics
+def calculate_density_metrics(lyrics):
+    words = re.findall(r'\b\w+\b', lyrics.lower())  # Tokenize words
+    total_words = len(words)
+    unique_words = len(set(words))
+    syllables = sum(syllable_count(word) for word in words)
+    lines = lyrics.strip().split("\n")
+    total_lines = len(lines)
+
+    return {
+        "total_words": total_words,
+        "unique_words": unique_words,
+        "syllables": syllables,
+        "lines": total_lines,
+        "unique_word_density": unique_words / total_words if total_words > 0 else 0,
+        "syllable_density": syllables / total_words if total_words > 0 else 0,
+        "line_density": total_words / total_lines if total_lines > 0 else 0
+    }
 
 def detect_languages(text):
     # langid detection
@@ -263,6 +292,10 @@ def maindata():
     shuffled_data_dict = {key: list(value) for key, value in zip(songs_dict.keys(), zip(*shuffled_data))}
 
     df = pd.DataFrame(shuffled_data_dict)
+
+    features = pd.DataFrame([calculate_density_metrics(lyric) for lyric in df['Lyrics_Processed']])
+    features_df = pd.DataFrame(features)  # Convert features into a DataFrame
+    df = pd.concat([df, features_df], axis=1)
 
     # this should work fine if incase this does not work replace
     # every thing before the name of the csv file with absolute path to foldername => data_original
