@@ -1,17 +1,5 @@
 import pathlib
-import pickle
-import re
-
-import lyricsgenius
-import numpy as np
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, mean_squared_error
-
-from gensim.models import Word2Vec
-
 
 # Load your dataset of song lyrics
 

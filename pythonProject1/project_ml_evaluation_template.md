@@ -236,10 +236,64 @@ from within the listner and so it being classify as a complex and poetic song ma
 a lot of sense.
 
 ## Alternative Models
-### Alternative N
-**Construction:** TODO
+### Alternative 1
+[linear_regression_model.pkl](models/linear_regression_model.pkl)
 
-**Evaluation:** TODO
+**Construction:** 
+used vectorized song lyrics and compounded sentiment to identify sentiment in songs
+
+**Evaluation:** 
+Accuracy: 0.73
+Precision: 0.76
+Recall: 0.86
+F1 Score: 0.81
+Mean Squared Error (MSE): 0.1777
+
+### Alternative 2
+[linear_regression_Word2Vec_model.pkl](models/linear_regression_Word2Vec_model.pkl)
+**Construction:**
+used vectorized song lyrics and compounded sentiment to identify sentiment in songs
+applied smote to increase sample in data to manage underfitting.
+
+
+**Evaluation:** 
+Accuracy: 0.53
+Precision: 0.64
+Recall: 0.66
+F1 Score: 0.65
+Mean Squared Error (MSE): 37692.4330
+
+
+### Alternative 3
+
+[linear_regression_happy_model.pkl](models/linear_regression_happy_model.pkl)
+
+**Construction:** 
+Used happy words associaated within song lyrics to identify and tag songs as happy songs
+used this to then compare with song lyrics and then predict if the song is a happy song
+
+
+**Evaluation:** 
+Accuracy: 0.80
+Precision: 0.83
+Recall: 0.91
+F1 Score: 0.87
+Mean Squared Error (MSE): 0.1663
+
+### Alternative 4
+
+[linear_regression_sad_model.pkl](models/linear_regression_sad_model.pkl)
+
+**Construction:**
+Used happy words associaated within song lyrics to identify and tag songs as sad songs
+used this to then compare with song lyrics and then predict if the song is a sad song
+
+**Evaluation:** 
+Accuracy: 0.61
+Precision: 0.61
+Recall: 0.74
+F1 Score: 0.67
+Mean Squared Error (MSE): 0.2513
 
 (duplicate above three times; remove this line when done)
 
@@ -252,7 +306,6 @@ a lot of sense.
 the use of the elbow method to identify the most optimal K
 ![iterationtofindOptimalK.png](visuals/iterationtofindOptimalK.png)
 
-(duplicate above as many times as needed; remove this line when done)
 
 ## Best Model
 
