@@ -143,7 +143,10 @@ if __name__ == "__main__":
     ################### working with lyrical density ###################
 
     wf_ml_training.trainKmean(songs)
-    wf_ml_training.trainDBScan(songs)
+    wf_ml_training.changedKmeans(songs)
+    wf_ml_training.changedKmeans2(songs)
+    wf_ml_training.changedKmeans3(songs)
+    wf_ml_training.changedKmeans4(songs)
 
     ################### working with lyrical density ###################
 

@@ -235,8 +235,16 @@ def kmeans_clustering_experiment(song_lyric):
 
     # will need both mode and scaler to get accurate results
     pathToModelFolder = path + "/" + "models" + "/"
-    loaded_kmeans = joblib.load(pathToModelFolder+'kmeans_model.pkl')
-    loaded_scaler = joblib.load(pathToModelFolder+'kmeans_scaler.pkl')
+    loaded_kmeans = joblib.load(pathToModelFolder + 'kmeans_model.pkl')
+    loaded_scaler = joblib.load(pathToModelFolder + 'kmeans_scaler.pkl')
+    loaded_kmeans2 = joblib.load(pathToModelFolder + 'kmeans_model2.pkl')
+    loaded_scaler2 = joblib.load(pathToModelFolder + 'kmeans_scaler2.pkl')
+    loaded_kmeans3 = joblib.load(pathToModelFolder + 'kmeans_model3.pkl')
+    loaded_scaler3 = joblib.load(pathToModelFolder + 'kmeans_scaler3.pkl')
+    loaded_kmeans4 = joblib.load(pathToModelFolder + 'kmeans_model4.pkl')
+    loaded_scaler4 = joblib.load(pathToModelFolder + 'kmeans_scaler4.pkl')
+    loaded_kmeans5 = joblib.load(pathToModelFolder + 'kmeans_model5.pkl')
+    loaded_scaler5 = joblib.load(pathToModelFolder + 'kmeans_scaler5.pkl')
     print("Model and scaler loaded!")
     new_song_lyrics = []
     new_song_lyrics.append(song_lyric)
@@ -251,10 +259,56 @@ def kmeans_clustering_experiment(song_lyric):
     # Standardize using the same scaler
     X_new_scaled = loaded_scaler.transform(X_new)
 
+    X_new2 = new_features_df[['syllables', 'lines',
+               'unique_word_density', 'syllable_density', 'line_density']]
+
+    X_new_scaled2 = loaded_scaler2.transform(X_new2)
+
+    X_new3 = new_features_df[['word_count', 'word_count_unique', 'unique_words', 'syllable_density', 'line_density']]
+
+    X_new_scaled3 = loaded_scaler3.transform(X_new3)
+
+    #
+
+
+    X_new4 = new_features_df[['syllable_density', 'line_density']]
+
+    X_new_scaled4 = loaded_scaler4.transform(X_new4)
+
+    X_new5 = new_features_df[['syllables', 'lines', 'unique_word_density', 'word_count',
+                 'word_count_unique', 'unique_words', 'syllable_density', 'line_density']]
+
+    X_new_scaled5 = loaded_scaler5.transform(X_new5)
+
     # Predict the cluster using the loaded model
     new_song_clusters = loaded_kmeans.predict(X_new_scaled)
 
+    new_song_clusters2 = loaded_kmeans2.predict(X_new_scaled2)
+
+    new_song_clusters3 = loaded_kmeans3.predict(X_new_scaled3)
+
+    new_song_clusters4 = loaded_kmeans4.predict(X_new_scaled4)
+
+    new_song_clusters5 = loaded_kmeans5.predict(X_new_scaled5)
+
+
     # Output the predicted cluster for each new song
     for i, cluster in enumerate(new_song_clusters):
+        cluster_name = cluster_names.get(cluster, f"Cluster {cluster}")
+        print(f"New Song {i + 1} is assigned to: {cluster_name}")
+
+    for i, cluster in enumerate(new_song_clusters2):
+        cluster_name = cluster_names.get(cluster, f"Cluster {cluster}")
+        print(f"New Song {i + 1} is assigned to: {cluster_name}")
+
+    for i, cluster in enumerate(new_song_clusters3):
+        cluster_name = cluster_names.get(cluster, f"Cluster {cluster}")
+        print(f"New Song {i + 1} is assigned to: {cluster_name}")
+
+    for i, cluster in enumerate(new_song_clusters4):
+        cluster_name = cluster_names.get(cluster, f"Cluster {cluster}")
+        print(f"New Song {i + 1} is assigned to: {cluster_name}")
+
+    for i, cluster in enumerate(new_song_clusters5):
         cluster_name = cluster_names.get(cluster, f"Cluster {cluster}")
         print(f"New Song {i + 1} is assigned to: {cluster_name}")
