@@ -274,8 +274,8 @@ New Song 1 is assigned to: Balanced and Moderate
 New Song 1 is assigned to: Complex and Poetic
 New Song 1 is assigned to: Complex and Poetic
 
-removing somthing of the features had led the model not factor in syllables lines
-and how they impact the nature of the song
+removing some of the features had led the model not factor in syllables lines
+and how they impact the nature of the song like why a song is catchy like in the case of the first song
 
 ### Varying A and B together
 **Prediction Trend Seen:** 
