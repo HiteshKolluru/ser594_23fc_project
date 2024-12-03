@@ -15,7 +15,8 @@ list_song_100 = {
 }
 
 # URL of the Pitchfork page
-urls = ["https://pitchfork.com/features/lists-and-guides/best-songs-2023/",
+urls = ["https://pitchfork.com/features/lists-and-guides/best-songs-2024/",
+        "https://pitchfork.com/features/lists-and-guides/best-songs-2023/",
        "https://pitchfork.com/features/lists-and-guides/best-songs-2022/",
        "https://pitchfork.com/features/lists-and-guides/best-songs-2021/",
        "https://pitchfork.com/features/lists-and-guides/best-songs-2020/",

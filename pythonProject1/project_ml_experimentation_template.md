@@ -289,4 +289,4 @@ using them in a different order
 'syllables', 'lines', 'unique_word_density', 'word_count', 
 'word_count_unique', 'unique_words', 'syllable_density', 'line_density'
 
-this dose not seem to affect the model created and works just like the first one
+this does not seem to affect the model created and works just like the first one

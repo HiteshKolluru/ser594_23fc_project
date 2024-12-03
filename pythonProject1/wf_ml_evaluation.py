@@ -35,7 +35,7 @@ def compute_average_embedding(text, word2vec_model):
 
 
 if __name__ == "__main__":
-    # Load your dataset of song lyrics
+
     path = str(pathlib.Path().resolve())
     folder_name = "data_processed"
     pathToFolder = path + "/" + folder_name + "/"
@@ -76,7 +76,6 @@ if __name__ == "__main__":
     # Compute embeddings for each song
     songs['embedding'] = songs['tokenized_lyrics'].apply(lambda x: compute_sentence_embedding(x, w2v_model))
 
-    # Convert embeddings to a 2D array for model input
     X = np.vstack(songs['embedding'].values)
     y = songs['Sentiment of lyrics']
 
@@ -150,7 +149,6 @@ if __name__ == "__main__":
 
     ################### working with lyrical density ###################
 
-    # Example usage of prediction function
     while True:
         title = input("Enter song title (or 'quit' to exit): ").strip()
 

@@ -1,6 +1,5 @@
 import re
 import time
-
 import lyricsgenius
 import pandas as pd
 import pathlib
@@ -48,23 +47,28 @@ with open(pathtopitchfork, mode ='r')as file:
     print(lines)
     time.sleep(2)
     song = genius.search_song(title=lines[0], artist=lines[1])
-    if song is not None and langid.classify(song.lyrics) == 'en':
-        if not (lines[1].lower() in song.artist.lower() or song.artist.lower() in lines[1].lower())  and not compare_strings(song.artist, lines[1]):
-        # if not compare_strings(song.artist, lines[1]) and not compare_strings(song.title, lines[0]):
-            print("SUSSUSSUSSUSSUSSUSSUSSUSSUSSUS")
-            print(song.title, song.artist)
-            print(lines[0], lines[1], lines[2])
-            print("SUSSUSSUSSUSSUSSUSSUSSUSSUSSUS")
-        else:
-            # print(song.lyrics)
-            # song_dict['Index'].append(str(i))
-            song_dict['artist'].append(song.artist)
-            song_dict['title'].append(song.title)
-            song_dict['url'].append(song.url)
-            song_dict['song_id'].append(song.id)
-            song_dict['lyrics'].append(song.lyrics)
-            song_dict['year'].append(lines[2])
-            # i+=1
+    if song is not None:
+        # not working correctly
+        # if  langid.classify(song.lyrics) == 'en': # dose not include if Lyrics are not in english
+            if not (lines[1].lower() in song.artist.lower() or song.artist.lower() in lines[
+                1].lower()) and not compare_strings(song.artist, lines[1]):
+                # if not compare_strings(song.artist, lines[1]) and not compare_strings(song.title, lines[0]):
+                print("Getting incorrect lyrics...")
+                print(song.title, song.artist)
+                print(lines[0], lines[1], lines[2])
+                print("Getting incorrect lyrics...")
+            else:
+                # print(song.lyrics)
+                # song_dict['Index'].append(str(i))
+                song_dict['artist'].append(song.artist)
+                song_dict['title'].append(song.title)
+                song_dict['url'].append(song.url)
+                song_dict['song_id'].append(song.id)
+                song_dict['lyrics'].append(song.lyrics)
+                song_dict['year'].append(lines[2])
+                # i+=1
+        # else:
+        #     print("song not in english")
     else:
         print("song not found")
 

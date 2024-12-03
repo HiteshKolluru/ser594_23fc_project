@@ -54,7 +54,6 @@ def trainKmean(songs):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Determine optimal number of clusters using the Elbow Method
     inertia = []
     k_range = range(1, 10)
     for k in k_range:
@@ -62,19 +61,10 @@ def trainKmean(songs):
         kmeans.fit(X_scaled)
         inertia.append(kmeans.inertia_)
 
-    # # Plot the Elbow Curve
-    # plt.figure(figsize=(8, 5))
-    # plt.plot(k_range, inertia, marker='o')
-    # plt.title("Elbow Method for Optimal K")
-    # plt.xlabel("Number of Clusters (k)")
-    # plt.ylabel("Inertia")
-    # plt.show()
 
-    # Choose k (e.g., 3) based on the Elbow Curve
     kmeans = KMeans(n_clusters=3, random_state=42)
     songs['cluster'] = kmeans.fit_predict(X_scaled)
 
-    # Visualize clusters (2D projection using PCA for simplicity)
     from sklearn.decomposition import PCA
 
     silhouette_avg = silhouette_score(X, songs['cluster'])
@@ -90,17 +80,6 @@ def trainKmean(songs):
     X_pca = pca.fit_transform(X_scaled)
     songs['pca1'] = X_pca[:, 0]
     songs['pca2'] = X_pca[:, 1]
-
-    # plt.figure(figsize=(10, 7))
-    # sns.scatterplot(x='pca1', y='pca2', hue='cluster', data=songs, palette='Set2', s=100)
-    # plt.title("Clusters of Songs Based on Lyrical Features")
-    # plt.xlabel("Overall Complexity")
-    # plt.ylabel("Structural Simplicity")
-    # plt.legend(title="Cluster")
-    # plt.show()
-
-    # Display the clustered DataFrame
-    print(songs)
 
     # will need both else would lead to inaccurate results
     pathToModelFolder = path + "/" + "models" + "/"
@@ -116,7 +95,6 @@ def changedKmeans(songs):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Determine optimal number of clusters using the Elbow Method
     inertia = []
     k_range = range(1, 10)
     for k in k_range:
@@ -124,19 +102,9 @@ def changedKmeans(songs):
         kmeans.fit(X_scaled)
         inertia.append(kmeans.inertia_)
 
-    # # Plot the Elbow Curve
-    # plt.figure(figsize=(8, 5))
-    # plt.plot(k_range, inertia, marker='o')
-    # plt.title("Elbow Method for Optimal K")
-    # plt.xlabel("Number of Clusters (k)")
-    # plt.ylabel("Inertia")
-    # plt.show()
-
-    # Choose k (e.g., 3) based on the Elbow Curve
     kmeans = KMeans(n_clusters=3, random_state=42)
     songs['cluster'] = kmeans.fit_predict(X_scaled)
 
-    # Visualize clusters (2D projection using PCA for simplicity)
     from sklearn.decomposition import PCA
 
     silhouette_avg = silhouette_score(X, songs['cluster'])
@@ -152,17 +120,6 @@ def changedKmeans(songs):
     X_pca = pca.fit_transform(X_scaled)
     songs['pca1'] = X_pca[:, 0]
     songs['pca2'] = X_pca[:, 1]
-
-    # plt.figure(figsize=(10, 7))
-    # sns.scatterplot(x='pca1', y='pca2', hue='cluster', data=songs, palette='Set2', s=100)
-    # plt.title("Clusters of Songs Based on Lyrical Features")
-    # plt.xlabel("Overall Complexity")
-    # plt.ylabel("Structural Simplicity")
-    # plt.legend(title="Cluster")
-    # plt.show()
-
-    # Display the clustered DataFrame
-    print(songs)
 
     # will need both else would lead to inaccurate results
     pathToModelFolder = path + "/" + "models" + "/"
@@ -178,7 +135,6 @@ def changedKmeans2(songs):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Determine optimal number of clusters using the Elbow Method
     inertia = []
     k_range = range(1, 10)
     for k in k_range:
@@ -186,19 +142,9 @@ def changedKmeans2(songs):
         kmeans.fit(X_scaled)
         inertia.append(kmeans.inertia_)
 
-    # # Plot the Elbow Curve
-    # plt.figure(figsize=(8, 5))
-    # plt.plot(k_range, inertia, marker='o')
-    # plt.title("Elbow Method for Optimal K")
-    # plt.xlabel("Number of Clusters (k)")
-    # plt.ylabel("Inertia")
-    # plt.show()
-
-    # Choose k (e.g., 3) based on the Elbow Curve
     kmeans = KMeans(n_clusters=3, random_state=42)
     songs['cluster'] = kmeans.fit_predict(X_scaled)
 
-    # Visualize clusters (2D projection using PCA for simplicity)
     from sklearn.decomposition import PCA
 
     silhouette_avg = silhouette_score(X, songs['cluster'])
@@ -215,16 +161,6 @@ def changedKmeans2(songs):
     songs['pca1'] = X_pca[:, 0]
     songs['pca2'] = X_pca[:, 1]
 
-    # plt.figure(figsize=(10, 7))
-    # sns.scatterplot(x='pca1', y='pca2', hue='cluster', data=songs, palette='Set2', s=100)
-    # plt.title("Clusters of Songs Based on Lyrical Features")
-    # plt.xlabel("Overall Complexity")
-    # plt.ylabel("Structural Simplicity")
-    # plt.legend(title="Cluster")
-    # plt.show()
-
-    # Display the clustered DataFrame
-    print(songs)
 
     # will need both else would lead to inaccurate results
     pathToModelFolder = path + "/" + "models" + "/"
@@ -239,7 +175,6 @@ def changedKmeans3(songs):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Determine optimal number of clusters using the Elbow Method
     inertia = []
     k_range = range(1, 10)
     for k in k_range:
@@ -247,19 +182,9 @@ def changedKmeans3(songs):
         kmeans.fit(X_scaled)
         inertia.append(kmeans.inertia_)
 
-    # # Plot the Elbow Curve
-    # plt.figure(figsize=(8, 5))
-    # plt.plot(k_range, inertia, marker='o')
-    # plt.title("Elbow Method for Optimal K")
-    # plt.xlabel("Number of Clusters (k)")
-    # plt.ylabel("Inertia")
-    # plt.show()
-
-    # Choose k (e.g., 3) based on the Elbow Curve
     kmeans = KMeans(n_clusters=3, random_state=42)
     songs['cluster'] = kmeans.fit_predict(X_scaled)
 
-    # Visualize clusters (2D projection using PCA for simplicity)
     from sklearn.decomposition import PCA
 
     silhouette_avg = silhouette_score(X, songs['cluster'])
@@ -275,17 +200,6 @@ def changedKmeans3(songs):
     X_pca = pca.fit_transform(X_scaled)
     songs['pca1'] = X_pca[:, 0]
     songs['pca2'] = X_pca[:, 1]
-
-    # plt.figure(figsize=(10, 7))
-    # sns.scatterplot(x='pca1', y='pca2', hue='cluster', data=songs, palette='Set2', s=100)
-    # plt.title("Clusters of Songs Based on Lyrical Features")
-    # plt.xlabel("Overall Complexity")
-    # plt.ylabel("Structural Simplicity")
-    # plt.legend(title="Cluster")
-    # plt.show()
-
-    # Display the clustered DataFrame
-    print(songs)
 
     # will need both else would lead to inaccurate results
     pathToModelFolder = path + "/" + "models" + "/"
@@ -301,7 +215,6 @@ def changedKmeans4(songs):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Determine optimal number of clusters using the Elbow Method
     inertia = []
     k_range = range(1, 10)
     for k in k_range:
@@ -309,19 +222,10 @@ def changedKmeans4(songs):
         kmeans.fit(X_scaled)
         inertia.append(kmeans.inertia_)
 
-    # # Plot the Elbow Curve
-    # plt.figure(figsize=(8, 5))
-    # plt.plot(k_range, inertia, marker='o')
-    # plt.title("Elbow Method for Optimal K")
-    # plt.xlabel("Number of Clusters (k)")
-    # plt.ylabel("Inertia")
-    # plt.show()
 
-    # Choose k (e.g., 3) based on the Elbow Curve
     kmeans = KMeans(n_clusters=3, random_state=42)
     songs['cluster'] = kmeans.fit_predict(X_scaled)
 
-    # Visualize clusters (2D projection using PCA for simplicity)
     from sklearn.decomposition import PCA
 
     silhouette_avg = silhouette_score(X, songs['cluster'])
@@ -337,17 +241,6 @@ def changedKmeans4(songs):
     X_pca = pca.fit_transform(X_scaled)
     songs['pca1'] = X_pca[:, 0]
     songs['pca2'] = X_pca[:, 1]
-
-    # plt.figure(figsize=(10, 7))
-    # sns.scatterplot(x='pca1', y='pca2', hue='cluster', data=songs, palette='Set2', s=100)
-    # plt.title("Clusters of Songs Based on Lyrical Features")
-    # plt.xlabel("Overall Complexity")
-    # plt.ylabel("Structural Simplicity")
-    # plt.legend(title="Cluster")
-    # plt.show()
-
-    # Display the clustered DataFrame
-    print(songs)
 
     # will need both else would lead to inaccurate results
     pathToModelFolder = path + "/" + "models" + "/"

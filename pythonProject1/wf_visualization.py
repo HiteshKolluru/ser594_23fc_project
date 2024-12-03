@@ -1,9 +1,15 @@
 import pathlib
+
+import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from nltk.sentiment import SentimentIntensityAnalyzer
+from sklearn.decomposition import PCA
+from sklearn.feature_extraction._stop_words import ENGLISH_STOP_WORDS
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from wordcloud import WordCloud
 from collections import Counter
+import seaborn as sns
 
 
 def get_sentiment(text, analyzer):
@@ -24,7 +30,7 @@ def mainViz():
     analyzer = SentimentIntensityAnalyzer()
     # this should work fine if it does not replace
     # every thing before the name of the csv file with absolute path to foldername => data_original
-    folder_name = "data_original"
+    folder_name = "data_processed"
     savefolder = '/visuals/'
     path = str(pathlib.Path().resolve())
     pathToFolder = path + "/" + folder_name + "/"
@@ -92,9 +98,28 @@ def mainViz():
     plt.show()
     plt.close()
 
-    # individual Artists most used words in their popular songs of this week
-    song = songs_dict['Lyrics_Processed']
-    artist = songs_dict['artist']
+
+    tfidf_vectorizer = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = tfidf_vectorizer.fit_transform(songs['lyrics'])
+
+    pca = PCA(n_components=2)
+    pca_components = pca.fit_transform(tfidf_matrix.toarray())
+
+    songs['PCA1'] = pca_components[:, 0]
+    songs['PCA2'] = pca_components[:, 1]
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(songs['PCA1'], songs['PCA2'], c=songs['year'], cmap='viridis', s=100)
+    plt.colorbar(label='Year of Release')  # More descriptive color bar label
+    plt.title("PCA Visualization of Songs Based on Lyric Content")  # Updated title
+    plt.xlabel('Principal Component 1 (Lyric Complexity & Theme Diversity)')  # More descriptive x-axis label
+    plt.ylabel('Principal Component 2 (Emotional Intensity & Word Usage Patterns)')  # More descriptive y-axis label
+    plt.show()
+
+
+    #  individual Artists most used words in their popular songs of this week
+    # song = songs_dict['Lyrics_Processed']
+    # artist = songs_dict['artist']
 
     # billie = []
     # bCount = Counter()
